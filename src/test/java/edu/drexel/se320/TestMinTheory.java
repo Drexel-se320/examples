@@ -13,16 +13,6 @@ import java.util.stream.Stream;
 public class TestMinTheory {
 
     @ParameterizedTest
-    @ValueSource(ints = {Integer.MIN_VALUE, -4, 0, 6, Integer.MAX_VALUE})
-    public void testMinTheories(int a, int b){
-        int c = Min.min(a,b);
-        assertTrue(c <= a, "min less than first argument");
-        assertTrue(c <= b, "min less than second argument");
-        assertTrue(c == a || c == b, "min is one of the arguments");
-    }
-
-
-    @ParameterizedTest
     @MethodSource("provideSomeOddTests")
     void testOdd(int input, boolean expected) {
         assertEquals(expected, input % 2 == 1);
