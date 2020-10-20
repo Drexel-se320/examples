@@ -10,6 +10,8 @@ repositories {
 dependencies {
     // Guava for contracts
     implementation 'com.google.guava:guava:29.0-jre'
+    // Apache Commons for silly things like pairs
+    implementation 'org.apache.commons:commons-lang3:3.11'
 
     // jqwik for property-based testing
     testImplementation "net.jqwik:jqwik:1.3.5"
