@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id "com.github.spotbugs" version "4.5.1"
+
 }
 
 repositories {
@@ -26,6 +28,9 @@ dependencies {
 
     // Selenium
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'  
+
+    // Security bugs plugin for SpotBugs
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
 
 test {
@@ -61,4 +66,14 @@ jacocoTestReport {
 tasks.withType(Test) {
     // Enable assertions (-ea) for tests
     enableAssertions = true
+}
+
+spotbugsMain {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
 }
