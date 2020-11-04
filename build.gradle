@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id "com.github.spotbugs" version "4.5.1"
-
+    //id 'org.checkerframework' version '0.5.11'
 }
 
 repositories {
@@ -29,8 +29,12 @@ dependencies {
     // Selenium
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'  
 
-    // Security bugs plugin for SpotBugs
-    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+//    // Checker framework
+//    compileOnly 'org.checkerframework:checker-qual:3.7.0'
+//    testCompileOnly 'org.checkerframework:checker-qual:3.7.0'
+//    checkerFramework 'org.checkerframework:checker:3.7.0'
+
+    testImplementation "org.mockito:mockito-core:3.6.0"
 }
 
 test {
@@ -77,3 +81,9 @@ spotbugsMain {
         }
     }
 }
+
+//checkerFramework {
+//  checkers = [
+//    'org.checkerframework.checker.nullness.NullnessChecker'
+//  ]
+//}
