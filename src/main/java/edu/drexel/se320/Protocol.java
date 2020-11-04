@@ -1,4 +1,4 @@
-package org.drexel.se320;
+package edu.drexel.se320;
 
 public interface Protocol {
 
