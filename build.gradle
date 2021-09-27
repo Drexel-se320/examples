@@ -11,20 +11,20 @@ repositories {
 
 dependencies {
     // Guava for contracts
-    implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'com.google.guava:guava:31.0-jre'
     // Apache Commons for silly things like pairs
     implementation 'org.apache.commons:commons-lang3:3.11'
 
     // jqwik for property-based testing
-    testImplementation "net.jqwik:jqwik:1.3.5"
+    testImplementation "net.jqwik:jqwik:1.5.6"
 
     // Hamcrest matchers
     testImplementation 'org.hamcrest:hamcrest:2.2'
     
     // JUnit for tests
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.6.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
 
     // Selenium
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'  
@@ -34,7 +34,7 @@ dependencies {
 //    testCompileOnly 'org.checkerframework:checker-qual:3.7.0'
 //    checkerFramework 'org.checkerframework:checker:3.7.0'
 
-    testImplementation "org.mockito:mockito-core:3.6.0"
+    testImplementation "org.mockito:mockito-core:3.12.4"
 }
 
 test {
