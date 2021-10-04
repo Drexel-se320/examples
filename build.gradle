@@ -27,7 +27,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
 
     // Selenium
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'  
+    //compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'  
 
 //    // Checker framework
 //    compileOnly 'org.checkerframework:checker-qual:3.7.0'
