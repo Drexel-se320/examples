@@ -55,7 +55,7 @@ compileTestJava {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.7"
     reportsDir = file("${buildDir}/reports/coverage")
 }
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestReport"
