@@ -1,8 +1,11 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id "com.github.spotbugs" version "4.7.6"
-    //id 'org.checkerframework' version '0.5.11'
+    // spotbugs plugin is broken on recent gradle versions https://github.com/spotbugs/spotbugs-gradle-plugin/issues/577
+    //id "com.github.spotbugs" version "5.0.0-beta.2"
+
+    // Uncomment to run Checker Framework
+    //id 'org.checkerframework' version '0.6.2'
 }
 
 repositories {
@@ -72,16 +75,17 @@ tasks.withType(Test) {
     enableAssertions = true
 }
 
-spotbugsMain {
-    reports {
-        html {
-            enabled = true
-            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
-            stylesheet = 'fancy-hist.xsl'
-        }
-    }
-}
+//spotbugsMain {
+//    reports {
+//        html {
+//            enabled = true
+//            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+//            stylesheet = 'fancy-hist.xsl'
+//        }
+//    }
+//}
 
+// Uncomment to run Checker Framework. List which checkers to run.
 //checkerFramework {
 //  checkers = [
 //    'org.checkerframework.checker.nullness.NullnessChecker'
