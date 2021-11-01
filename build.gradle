@@ -6,6 +6,9 @@ plugins {
 
     // Uncomment to run Checker Framework
     //id 'org.checkerframework' version '0.6.2'
+
+    // Java Microbenchmark Harness
+    id "me.champeau.jmh" version '0.6.6'
 }
 
 repositories {
