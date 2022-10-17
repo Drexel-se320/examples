@@ -1,8 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    // spotbugs plugin is broken on recent gradle versions https://github.com/spotbugs/spotbugs-gradle-plugin/issues/577
-    //id "com.github.spotbugs" version "5.0.0-beta.2"
+    id "com.github.spotbugs" version "5.0.12"
 
     // Uncomment to run Checker Framework
     //id 'org.checkerframework' version '0.6.2'
@@ -62,13 +61,13 @@ compileTestJava {
 
 jacoco {
     toolVersion = "0.8.7"
-    reportsDir = file("${buildDir}/reports/coverage")
+    reportsDirectory = file("${buildDir}/reports/coverage")
 }
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestReport"
 jacocoTestReport {
     reports {
-        xml.enabled false
-        csv.enabled false
+        //xml.required false
+        //csv.enabled false
         html.destination file("${buildDir}/reports/coverage")
     }
 }
@@ -78,15 +77,15 @@ tasks.withType(Test) {
     enableAssertions = true
 }
 
-//spotbugsMain {
-//    reports {
-//        html {
-//            enabled = true
-//            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
-//            stylesheet = 'fancy-hist.xsl'
-//        }
-//    }
-//}
+spotbugsMain {
+    reports {
+        html {
+            required = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
 
 // Uncomment to run Checker Framework. List which checkers to run.
 //checkerFramework {
