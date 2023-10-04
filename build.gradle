@@ -16,39 +16,37 @@ repositories {
 
 dependencies {
     // Guava for contracts
-    implementation 'com.google.guava:guava:31.0-jre'
+    implementation 'com.google.guava:guava:32.1.2-jre'
+
     // Apache Commons for silly things like pairs
     implementation 'org.apache.commons:commons-lang3:3.11'
 
     // jqwik for property-based testing
-    testImplementation "net.jqwik:jqwik:1.5.6"
+    testImplementation "net.jqwik:jqwik:1.8.0"
 
     // Hamcrest matchers
     testImplementation 'org.hamcrest:hamcrest:2.2'
     
     // JUnit for tests
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.10.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+
+    testImplementation "org.mockito:mockito-core:3.12.4"
 
     // Selenium
-    //compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'  
+    //compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 
 //    // Checker framework
 //    compileOnly 'org.checkerframework:checker-qual:3.7.0'
 //    testCompileOnly 'org.checkerframework:checker-qual:3.7.0'
 //    checkerFramework 'org.checkerframework:checker:3.7.0'
-
-    testImplementation "org.mockito:mockito-core:3.12.4"
 }
 
 test {
     useJUnitPlatform {
         includeEngines 'jqwik', 'junit-jupiter'
     }
-    //include '**/*Properties.class'
-    //include '**/*Test.class'
-    //include '**/*Tests.class'
     testLogging {
         events "passed", "skipped", "failed"
 	exceptionFormat "short"
@@ -60,15 +58,14 @@ compileTestJava {
 }
 
 jacoco {
-    toolVersion = "0.8.7"
-    reportsDirectory = file("${buildDir}/reports/coverage")
+    toolVersion = "0.8.9"
 }
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestReport"
 jacocoTestReport {
     reports {
-        //xml.required false
-        //csv.enabled false
-        html.destination file("${buildDir}/reports/coverage")
+        xml.required = false
+        csv.required = false
+        html.destination = file("${buildDir}/reports/coverage")
     }
 }
 
@@ -77,19 +74,27 @@ tasks.withType(Test) {
     enableAssertions = true
 }
 
-spotbugsMain {
-    reports {
-        html {
-            required = true
-            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
-            stylesheet = 'fancy-hist.xsl'
+// This task only runs if 'test' has already run, i.e., "gradle test jacocoTestCoverageVerification"
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.99
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'CLASS'
+            includes = ['edu.drexel.se320.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 0.3
+            }
         }
     }
 }
 
-// Uncomment to run Checker Framework. List which checkers to run.
-//checkerFramework {
-//  checkers = [
-//    'org.checkerframework.checker.nullness.NullnessChecker'
-//  ]
-//}
+
