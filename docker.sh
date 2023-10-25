@@ -1,10 +1,10 @@
 #!/bin/bash
 
-lines=`docker image ls amazoncorretto:16 | wc -l`
+lines=`docker image ls amazoncorretto:20 | wc -l`
 
 if [ $lines -ne "2" ];
 then
-	docker pull amazoncorretto:16;
+	docker pull amazoncorretto:20;
 fi
 
-docker run -it -v "$(pwd)":/class amazoncorretto:16
+docker run -it -v "$(pwd)":/class amazoncorretto:20
