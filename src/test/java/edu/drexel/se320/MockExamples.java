@@ -46,7 +46,7 @@ public class MockExamples {
 
     InOrder inOrder = inOrder(p);
 
-    // These calls verify that the calls occured, but they don't impose ordering!
+    // These calls verify that the calls occured, and *do* impose ordering!
     inOrder.verify(p).start(anyInt());
     inOrder.verify(p).middle();
     inOrder.verify(p).end();
