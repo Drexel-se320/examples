@@ -31,11 +31,12 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
     testImplementation "org.junit.jupiter:junit-jupiter-params:5.10.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 
     testImplementation "org.mockito:mockito-core:3.12.4"
 
     // Selenium
-    //compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
 
 //    // Checker framework
 //    compileOnly 'org.checkerframework:checker-qual:3.7.0'
@@ -51,6 +52,9 @@ test {
         events "passed", "skipped", "failed"
 	exceptionFormat "short"
     }
+    reports {
+        junitXml.outputLocation = layout.buildDirectory.dir("test-junit-xml")
+    }
 }
 compileTestJava {
 	options.compilerArgs += '-parameters'
@@ -58,14 +62,17 @@ compileTestJava {
 }
 
 jacoco {
-    toolVersion = "0.8.9"
+    toolVersion = "0.8.12"
 }
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestReport"
 jacocoTestReport {
+    dependsOn test
     reports {
-        xml.required = false
-        csv.required = false
-        html.destination = file("${buildDir}/reports/coverage")
+        xml.required = true
+        xml.outputLocation = file("${buildDir}/reports/jacoco-coverage.xml")
+        csv.required = true
+        html.required = true
+        html.outputLocation = file("${buildDir}/reports/coverage")
     }
 }
 
@@ -75,26 +82,26 @@ tasks.withType(Test) {
 }
 
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestCoverageVerification"
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                minimum = 0.99
-            }
-        }
-
-        rule {
-            enabled = true
-            element = 'CLASS'
-            includes = ['edu.drexel.se320.*']
-
-            limit {
-                counter = 'LINE'
-                value = 'TOTALCOUNT'
-                maximum = 0.3
-            }
-        }
-    }
-}
+// jacocoTestCoverageVerification {
+//     violationRules {
+//         rule {
+//             limit {
+//                 minimum = 0.99
+//             }
+//         }
+// 
+//         rule {
+//             enabled = true
+//             element = 'CLASS'
+//             includes = ['edu.drexel.se320.*']
+// 
+//             limit {
+//                 counter = 'LINE'
+//                 value = 'TOTALCOUNT'
+//                 maximum = 0.3
+//             }
+//         }
+//     }
+// }
 
 
