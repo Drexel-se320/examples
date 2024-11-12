@@ -36,7 +36,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core:3.12.4"
 
     // Selenium
-    testImplementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.26.0'
 
 //    // Checker framework
 //    compileOnly 'org.checkerframework:checker-qual:3.7.0'
