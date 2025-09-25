@@ -62,7 +62,7 @@ compileTestJava {
 }
 
 jacoco {
-    toolVersion = "0.8.12"
+    toolVersion = "0.8.13"
 }
 // This task only runs if 'test' has already run, i.e., "gradle test jacocoTestReport"
 jacocoTestReport {
